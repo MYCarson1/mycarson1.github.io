@@ -1,72 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>输入内容添加到网页示例</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 300px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 300px;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>欢迎查询</h1>
-    <p>美陈互动装置</p>
+
+  <form id="inputForm">
+    <label for="inputText">请输入内容：</label>
+    <input type="text" id="inputText">
+    <button type="button" onclick="addContent()">添加内容</button>
+  </form>
+
+  <div id="output">
+    这里将显示你输入的内容
+  </div>
+
+  <script>
+    function addContent() {
+      // 获取输入框的值
+      var inputValue = document.getElementById('inputText').value;
+      // 创建一个新的段落元素
+      var newParagraph = document.createElement('p');
+      // 设置段落元素的文本内容为输入的值
+      newParagraph.textContent = inputValue;
+      // 获取输出区域的元素
+      var outputDiv = document.getElementById('output');
+      // 将新段落添加到输出区域
+      outputDiv.appendChild(newParagraph);
+      // 清空输入框
+      document.getElementById('inputText').value = '';
+    }
+  </script>
+
 </body>
-</html>
 
-<style>
-
-p{
-    color: red;
-    font-size: 700;
-    text-align: center;
-
-}
-
-div{
-
-    background-color: rgb(49, 56, 67);
-    background-size: 400px;
-    color: green;
-
-}
-
-table,td{
-
-border: green 2px solid;
-
-}
-table{
-
-border-collapse: collapse;
-width: 500px;
-height: 300px;
-
-}
-td{
-
-text-align: center;
-color: hotpink;
-
-}
-</style>
-
-</head>
-<body>
-    <div>dada </div>
-    <table>
-        <tr>
-            <td>单元格</td>
-            <td>单元格</td>
-            <td>单元格</td>
-        </tr>
-        <tr>
-            <td>单元格</td>
-            <td>单元格</td>
-            <td>单元格</td>
-        </tr>
-        <tr>
-            <td>单元格</td>
-            <td>单元格</td>
-            <td>单元格</td>
-        </tr>
-    </table>
-</body>
 </html>
