@@ -1,312 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>互动美陈道具资讯</title>
+    <title>每日资讯</title>
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
+        /* 基础样式 */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
             line-height: 1.6;
         }
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        /* Header */
-        header {
+        /* 导航样式 */
+        nav {
             background: #333;
-            color: #fff;
-            padding: 10px 0;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        /* Main Content */
-        .hero {
-            text-align: center;
-            padding: 50px 0;
-            background: #f4f4f4;
-            margin-bottom: 20px;
-        }
-
-        .hero h2 {
-            margin: 0;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #333;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .featured-posts {
-            margin-top: 20px;
-        }
-
-        .post {
-            margin-bottom: 20px;
-        }
-
-        .post h3 {
-            margin: 0;
-        }
-
-        .post p {
-            margin: 5px 0;
-        }
-
-        /* Footer */
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-
-        /* Form Styles */
-        form label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        form input, form textarea {
+            padding: 1rem;
+            position: fixed;
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            top: 0;
+            z-index: 100;
         }
 
-        form button {
-            background: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #555;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 20px;
+            padding: 0 20px;
+        }
+
+        /* 资讯列表 */
+        .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .news-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
             cursor: pointer;
         }
 
-        /* Responsive Design */
+        .news-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .news-excerpt {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        /* 详情页样式 */
+        .detail-page {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .detail-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .container {
-                width: 90%;
+            .news-list {
+                grid-template-columns: 1fr;
             }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+            
+            nav {
+                text-align: center;
             }
-
-            nav ul li {
-                margin: 10px 0;
+            
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>美陈互动</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">首页</a></li>
-                    <li><a href="#blog">资讯</a></li>
-                    <li><a href="#about">关于</a></li>
-                    <li><a href="#contact">联系</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <nav>
+        <a href="#home">首页</a>
+        <a href="#about">关于我们</a>
+        <a href="#contact">联系我们</a>
+    </nav>
 
-    <main class="container">
-        <!-- 首页 -->
-        <section id="home" class="hero">
-            <h2>欢迎到来！！！</h2>
-            <p>专为互动人打造资讯的信息社区</p>
-            <a href="#blog" class="btn">Read Blog</a>
-        </section>
-
-        <!-- 资讯 -->
-        <section id="blog" class="featured-posts">
-            <h2>Blog Posts</h2>
-            <div class="post">
-                <h3><a href="#post1">Post Title 1</a></h3>
-                <p>Short description of the post. Click to read more.</p>
-            </div>
-            <div class="post">
-                <h3><a href="#post2">Post Title 2</a></h3>
-                <p>Short description of the post. Click to read more.</p>
-            </div>
-            <div class="post">
-                <h3><a href="#post3">Post Title 3</a></h3>
-                <p>Short description of the post. Click to read more.</p>
-            </div>
-        </section>
-
-        <!-- 单个资讯 -->
-        <section id="post1" class="single-post">
-            <h2>机械动态翻页矩阵屏</h2>
-            <p class="meta">Published on October 10, 2023</p>
-            <p>“机械翻页矩阵互动”是一种结合机械翻页装置和矩阵排列的互动展示系统，通常用于艺术装置、展览、广告牌或公共空间中的动态视觉展示。它通过多个独立的机械翻页单元组成矩阵，每个单元可以独立控制，从而实现复杂的动态效果和互动体验。</p>
-            <p>1. 核心概念
-                机械翻页单元：每个单元是一个独立的机械翻页装置，通常由马达、机械臂或滚轮驱动，能够翻转显示不同的内容（如颜色、图案或文字）。
-                
-                矩阵排列：多个翻页单元按照行和列排列成矩阵，形成一个整体展示面。
-                
-                互动控制：通过传感器、编程或用户输入（如触摸、声音、手势）控制矩阵中每个单元的状态，实现动态效果。</p>
-            <p>2. 工作原理
-                硬件部分：
-                
-                每个翻页单元由马达、机械臂或滚轮驱动，能够翻转显示不同的内容（如双面印刷的卡片或电子墨水屏）。
-                
-                多个单元通过控制器（如Arduino、Raspberry Pi）连接，形成矩阵。
-                
-                软件部分：
-                
-                使用编程语言（如Python、C++）或可视化工具（如TouchDesigner）控制每个单元的状态。
-                
-                通过传感器（如摄像头、麦克风、红外传感器）捕捉用户输入，实时调整矩阵的显示效果。
-                
-                互动逻辑：
-                
-                用户可以通过手势、声音或其他方式与矩阵互动，触发特定的动态效果（如波浪、文字显示、图案变化）。</p>
-            <P>3. 应用场景
-                艺术装置：
-                
-                用于展览或公共空间，展示动态视觉效果，吸引观众互动。
-                
-                例如，根据观众的动作或声音改变矩阵的图案。
-                
-                广告展示：
-                
-                在商场或户外广告牌中使用，通过动态翻页吸引注意力。
-                
-                可以显示文字、图案或动态广告内容。
-                
-                教育或娱乐：
-                
-                在博物馆、科技馆中用于互动展示，解释科学原理或历史事件。
-                
-                例如，通过矩阵展示地球的自转、季节变化等。
-                
-                舞台设计：
-                
-                在音乐会或戏剧表演中作为背景装置，增强舞台效果。</P>
-            <P>4. 技术实现
-                硬件：
-                
-                翻页单元：使用小型马达（如步进电机或舵机）驱动翻页机构。
-                
-                控制器：Arduino、Raspberry Pi等微控制器。
-                
-                传感器：摄像头、麦克风、红外传感器等。
-                
-                软件：
-                
-                编程语言：C++、Python、Processing等。
-                
-                可视化工具：TouchDesigner、Max/MSP等。
-                
-                通信协议：
-                
-                通过Wi-Fi、蓝牙或串口通信实现控制器与翻页单元的连接。</P>
-            <P>5. 设计示例
-                动态波浪效果：
-                
-                矩阵中的翻页单元依次翻转，形成波浪状的运动效果。
-                
-                文字或图案显示：
-                
-                通过控制每个单元的状态，显示特定的文字或图案。
-                
-                互动游戏：
-                
-                用户可以通过手势或声音控制矩阵中的单元，完成互动游戏。</P>
-            <P>6. 优势与挑战
-                优势：
-                
-                视觉效果独特，吸引观众注意力。
-                
-                互动性强，适合公共空间或展览场景。
-                
-                可扩展性强，矩阵大小和单元数量可根据需求调整。
-                
-                挑战：
-                
-                硬件成本较高，尤其是大规模矩阵。
-                
-                需要复杂的编程和调试，确保每个单元同步运行。
-                
-                维护难度较大，机械部件可能因频繁使用而磨损。</P>
-            <a href="#blog" class="btn">返回资讯</a>
-        </section>
-
-        <!-- 关于 -->
-        <section id="about">
-            <h2>关于</h2>
-            <p>Hello! I'm the author of this blog. I love sharing my thoughts and ideas with the world.</p>
-            <p>This blog is a place where I write about topics that interest me, such as technology, design, and life.</p>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>联系</h2>
-            <form id="contactForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 互动美陈道具资讯. All rights reserved.</p>
-        </div>
-    </footer>
+    <div id="content" class="container"></div>
 
     <script>
-        // JavaScript for form submission
-        document.getElementById('contactForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-            alert('Thank you for your message!'); // Simple alert for demo
-            document.getElementById('contactForm').reset(); // Clear the form
+        // 资讯数据
+        const newsData = [
+            {
+                id: 1,
+                title: '人工智能新突破',
+                excerpt: '最新研究显示，AI在医疗诊断领域取得重大进展...',
+                image: 'https://picsum.photos/400/300?random=1',
+                date: '2024-03-20',
+                content: '<p>详细内容...</p><img src="https://picsum.photos/800/400?random=1" class="detail-image">'
+            },
+            {
+                id: 2,
+                title: '气候变化峰会召开',
+                excerpt: '全球领导人齐聚纽约讨论气候问题解决方案...',
+                image: 'https://picsum.photos/400/300?random=2',
+                date: '2024-03-19',
+                content: '<p>详细内容...</p><img src="https://picsum.photos/800/400?random=2" class="detail-image">'
+            }
+        ];
+
+        // 路由处理
+        function handleRoute() {
+            const hash = window.location.hash.substr(1);
+            const contentDiv = document.getElementById('content');
+            
+            switch(hash) {
+                case 'about':
+                    contentDiv.innerHTML = `
+                        <div class="detail-page">
+                            <h1>关于我们</h1>
+                            <p>我们是专业的资讯平台...</p>
+                        </div>
+                    `;
+                    break;
+                case 'contact':
+                    contentDiv.innerHTML = `
+                        <div class="detail-page">
+                            <h1>联系我们</h1>
+                            <p>邮箱: contact@example.com</p>
+                        </div>
+                    `;
+                    break;
+                case 'news':
+                    const id = new URLSearchParams(window.location.search).get('id');
+                    const news = newsData.find(item => item.id == id);
+                    if (news) {
+                        contentDiv.innerHTML = `
+                            <div class="detail-page">
+                                <h1>${news.title}</h1>
+                                <div>${news.content}</div>
+                                <p class="news-date">发布日期: ${news.date}</p>
+                            </div>
+                        `;
+                    }
+                    break;
+                default:
+                    renderHome();
+            }
+        }
+
+        // 渲染首页
+        function renderHome() {
+            const contentDiv = document.getElementById('content');
+            const newsItems = newsData.map(item => `
+                <div class="news-item" onclick="window.location='#news?id=${item.id}'">
+                    <img src="${item.image}" class="news-image" alt="${item.title}">
+                    <div class="news-content">
+                        <h2 class="news-title">${item.title}</h2>
+                        <p class="news-excerpt">${item.excerpt}</p>
+                        <p class="news-date">${item.date}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            contentDiv.innerHTML = `<div class="news-list">${newsItems}</div>`;
+        }
+
+        // 初始化
+        window.addEventListener('load', () => {
+            window.addEventListener('hashchange', handleRoute);
+            if (!window.location.hash) window.location.hash = '#home';
+            handleRoute();
         });
     </script>
 </body>
